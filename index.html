@@ -1,378 +1,395 @@
-<h2 class="sr-only">Employee Attrition Analytics Dashboard — 47,566 employees, 34.9% overall attrition rate across 10 departments</h2>
-
 <style>
-:root {
-  --navy: #0D2B55;
-  --blue: #185FA5;
-  --blue-lt: #E6F1FB;
-  --blue-md: #378ADD;
-  --red: #E24B4A;
-  --red-lt: #FCEBEB;
-  --green: #3B6D11;
-  --green-lt: #EAF3DE;
-  --amber: #BA7517;
-  --amber-lt: #FAEEDA;
-  --coral: #D85A30;
-  --teal: #1D9E75;
-  --purple: #7F77DD;
-  --gray-lt: #F1EFE8;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{font-family:var(--font-sans);background:#0f172a;border-radius:16px;overflow:hidden;padding-bottom:20px}
 
-.dash-header {
-  padding: 1.25rem 1.5rem 1rem;
-  border-bottom: 0.5px solid var(--color-border-tertiary);
-  display: flex; align-items: baseline; justify-content: space-between;
-}
-.dash-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
-.dash-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
-.badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--blue-lt); color: var(--blue); }
+.hero{background:#0f172a;padding:20px 22px 18px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.hero-title{font-size:18px;font-weight:500;color:#f1f5f9}
+.hero-sub{font-size:12px;color:#64748b;margin-top:2px}
+.htag{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;background:rgba(239,68,68,0.18);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
 
-.kpi-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 8px; padding: 1rem 1.5rem; }
-.kpi { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
-.kpi-label { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
-.kpi-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1; }
-.kpi-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; }
-.kpi.danger .kpi-val { color: #A32D2D; }
-.kpi.good .kpi-val { color: #3B6D11; }
-.kpi.warn .kpi-val { color: #854F0B; }
+.krow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:0 22px}
+.kcard{border-radius:12px;padding:14px 14px 12px;position:relative;overflow:hidden}
+.kcard.c1{background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25)}
+.kcard.c2{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25)}
+.kcard.c3{background:rgba(239,68,68,0.14);border:1px solid rgba(239,68,68,0.3)}
+.kcard.c4{background:rgba(251,146,60,0.14);border:1px solid rgba(251,146,60,0.3)}
+.kcard.c5{background:rgba(129,140,248,0.14);border:1px solid rgba(129,140,248,0.3)}
+.kcard.c6{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.25)}
+.klbl{font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.kcard.c1 .klbl{color:#7dd3fc}
+.kcard.c2 .klbl{color:#86efac}
+.kcard.c3 .klbl{color:#fca5a5}
+.kcard.c4 .klbl{color:#fdba74}
+.kcard.c5 .klbl{color:#a5b4fc}
+.kcard.c6 .klbl{color:#6ee7b7}
+.kval{font-size:22px;font-weight:500;line-height:1.1}
+.kcard.c1 .kval{color:#e0f2fe}
+.kcard.c2 .kval{color:#dcfce7}
+.kcard.c3 .kval{color:#fee2e2}
+.kcard.c4 .kval{color:#ffedd5}
+.kcard.c5 .kval{color:#ede9fe}
+.kcard.c6 .kval{color:#d1fae5}
+.ksub{font-size:10px;margin-top:3px;color:rgba(255,255,255,0.35)}
 
-.section { padding: 0 1.5rem 1.5rem; }
-.section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 0.75rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
+.zone{padding:18px 22px 4px}
+.ztitle{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#475569;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)}
 
-.chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.chart-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-.chart-box { }
-.chart-label { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; }
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 22px 14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 22px 14px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0 22px 14px}
 
-.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; font-size: 11px; color: var(--color-text-secondary); }
-.legend span { display: flex; align-items: center; gap: 4px; }
-.dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:14px 16px}
+.card.blue-tint{background:rgba(56,189,248,0.05);border-color:rgba(56,189,248,0.15)}
+.card.red-tint{background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.15)}
+.card.green-tint{background:rgba(74,222,128,0.05);border-color:rgba(74,222,128,0.15)}
+.card.purple-tint{background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.18)}
+.card.amber-tint{background:rgba(251,146,60,0.05);border-color:rgba(251,146,60,0.15)}
 
-.bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-.bar-name { font-size: 12px; color: var(--color-text-secondary); width: 90px; flex-shrink: 0; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar-name-lg { width: 120px; }
-.bar-track { flex: 1; height: 14px; background: var(--color-background-secondary); border-radius: 3px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
-.bar-val { font-size: 11px; color: var(--color-text-secondary); width: 36px; flex-shrink: 0; }
+.clbl{font-size:11px;font-weight:500;color:#94a3b8;margin-bottom:10px}
 
-.donut-wrap { display: flex; align-items: center; gap: 16px; }
-.donut-legend { font-size: 12px; }
-.donut-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-.donut-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.donut-name { color: var(--color-text-primary); }
-.donut-pct { color: var(--color-text-secondary); font-size: 11px; margin-left: 4px; }
+.hbar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.hbar-name{font-size:11px;color:#64748b;width:92px;flex-shrink:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar-track{flex:1;height:10px;background:rgba(255,255,255,0.07);border-radius:5px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:5px}
+.hbar-val{font-size:11px;font-weight:500;color:#cbd5e1;width:34px;flex-shrink:0}
 
-.risk-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; margin: 2px; }
-.risk-high { background: #FCEBEB; color: #A32D2D; }
-.risk-med { background: #FAEEDA; color: #854F0B; }
-.risk-low { background: #EAF3DE; color: #3B6D11; }
+.ring-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:11px}
+.ring-name{color:#94a3b8}
+.ring-val{font-weight:500;color:#e2e8f0;margin-left:6px;flex-shrink:0}
+.rbar-track{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:3px;margin-top:2px;overflow:hidden}
+.rbar-fill{height:4px;border-radius:3px}
 
-.insight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.insight-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem; }
-.insight-icon { font-size: 14px; margin-bottom: 4px; }
-.insight-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
-.insight-body { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; }
+.gauge-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 22px 14px}
+.gitem{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center}
+.gval{font-size:16px;font-weight:500;margin-top:4px}
+.glbl{font-size:10px;color:#64748b;text-align:center;margin-top:3px;line-height:1.4}
+.gbase{font-size:9px;color:#475569;margin-top:1px}
+
+.lrow{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:#64748b;margin-bottom:8px}
+.lrow span{display:flex;align-items:center;gap:4px}
+.ldot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+.ins-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:4px 22px 4px}
+.ins{border-radius:10px;padding:12px 14px}
+.ins.i1{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2)}
+.ins.i2{background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.2)}
+.ins.i3{background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.18)}
+.ins-badge{font-size:9px;font-weight:500;padding:2px 7px;border-radius:10px;display:inline-block;margin-bottom:5px}
+.ins.i1 .ins-badge{background:rgba(239,68,68,0.25);color:#fca5a5}
+.ins.i2 .ins-badge{background:rgba(251,146,60,0.25);color:#fdba74}
+.ins.i3 .ins-badge{background:rgba(56,189,248,0.2);color:#7dd3fc}
+.ins-head{font-size:12px;font-weight:500;color:#e2e8f0;margin-bottom:4px}
+.ins-body{font-size:11px;color:#64748b;line-height:1.55}
 </style>
 
-<div class="dash-header">
-  <div>
-    <div class="dash-title">Employee Attrition Analytics</div>
-    <div class="dash-sub">Based on 47,566 employee records — cleaned & validated</div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-title">Employee Attrition Analytics</div>
+        <div class="hero-sub">47,566 records · cleaned & validated · April 2026</div>
+      </div>
+      <span class="htag">34.9% attrition rate</span>
+    </div>
+    <div class="krow">
+      <div class="kcard c1"><div class="klbl">Total employees</div><div class="kval">47,566</div><div class="ksub">All records</div></div>
+      <div class="kcard c2"><div class="klbl">Active</div><div class="kval">30,976</div><div class="ksub">65.1% retained</div></div>
+      <div class="kcard c3"><div class="klbl">Attrited</div><div class="kval">16,590</div><div class="ksub">Left the company</div></div>
+      <div class="kcard c4"><div class="klbl">Attrition rate</div><div class="kval">34.9%</div><div class="ksub">Overall</div></div>
+      <div class="kcard c5"><div class="klbl">Avg tenure</div><div class="kval">8.0 yrs</div><div class="ksub">At company</div></div>
+      <div class="kcard c6"><div class="klbl">Avg salary/mo</div><div class="kval">$9,065</div><div class="ksub">All roles</div></div>
+    </div>
   </div>
-  <span class="badge">April 2026</span>
-</div>
 
-<div class="kpi-grid">
-  <div class="kpi"><div class="kpi-label">Total employees</div><div class="kpi-val">47,566</div><div class="kpi-sub">All records</div></div>
-  <div class="kpi good"><div class="kpi-label">Active</div><div class="kpi-val">30,976</div><div class="kpi-sub">65.1% retained</div></div>
-  <div class="kpi danger"><div class="kpi-label">Attrited</div><div class="kpi-val">16,590</div><div class="kpi-sub">Left the company</div></div>
-  <div class="kpi danger"><div class="kpi-label">Attrition rate</div><div class="kpi-val">34.9%</div><div class="kpi-sub">Overall</div></div>
-  <div class="kpi warn"><div class="kpi-label">Avg tenure</div><div class="kpi-val">8.0 yrs</div><div class="kpi-sub">At company</div></div>
-  <div class="kpi"><div class="kpi-label">Avg monthly salary</div><div class="kpi-val">$9,065</div><div class="kpi-sub">Across all roles</div></div>
-</div>
-
-<div class="section">
-  <div class="section-title">Attrition by department &amp; category</div>
-  <div class="chart-grid-2">
-
-    <div class="chart-box">
-      <div class="chart-label">Attrition rate by department</div>
-      <div id="dept-bars"></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">Overtime vs no overtime</div>
-      <div style="position:relative;height:160px;"><canvas id="ot-chart" role="img" aria-label="Bar chart comparing attrition rate: overtime yes 41.5%, no 31.4%">Overtime Yes: 41.5%, No: 31.4%</canvas></div>
-      <div style="height:16px;"></div>
-      <div class="chart-label">Work-life balance impact</div>
-      <div style="position:relative;height:160px;"><canvas id="wlb-chart" role="img" aria-label="Bar chart showing attrition rate by work-life balance rating: Poor 40.8%, Fair 34.2%, Good 34.1%, Excellent 34.6%">Poor: 40.8%, Fair: 34.2%, Good: 34.1%, Excellent: 34.6%</canvas></div>
-    </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">Demographics</div>
-  <div class="chart-grid-3">
-
-    <div class="chart-box">
-      <div class="chart-label">By gender</div>
-      <div style="position:relative;height:160px;"><canvas id="gen-chart" role="img" aria-label="Bar chart of attrition by gender">Gender attrition rates</canvas></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">By age group</div>
-      <div style="position:relative;height:160px;"><canvas id="age-chart" role="img" aria-label="Bar chart of attrition by age band">Age attrition rates</canvas></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">By marital status</div>
-      <div style="position:relative;height:160px;"><canvas id="mar-chart" role="img" aria-label="Bar chart of attrition by marital status">Marital status attrition rates: Single 37.5%, Married 33.7%, Divorced 33.5%</canvas></div>
-    </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">Exit reasons &amp; satisfaction</div>
-  <div class="chart-grid-2">
-
-    <div class="chart-box">
-      <div class="chart-label">Top exit reasons (attrited employees only)</div>
-      <div id="exit-bars"></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">Job satisfaction vs attrition</div>
-      <div style="position:relative;height:280px;"><canvas id="sat-chart" role="img" aria-label="Grouped bar chart of job satisfaction score 1-5 split by attrition Yes and No">Job satisfaction distribution by attrition status</canvas></div>
-      <div class="legend" style="margin-top:6px;">
-        <span><span class="dot" style="background:#E24B4A;"></span>Attrited</span>
-        <span><span class="dot" style="background:#3B6D11;"></span>Active</span>
+  <div class="zone"><div class="ztitle">Workforce split & department breakdown</div></div>
+  <div class="g2">
+    <div class="card blue-tint">
+      <div class="clbl">Active vs attrited — overall split</div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <div style="position:relative;width:130px;height:130px;flex-shrink:0">
+          <canvas id="dc-main" role="img" aria-label="Donut: 65.1% active, 34.9% attrited">Active 65.1%, Attrited 34.9%</canvas>
+        </div>
+        <div>
+          <div style="font-size:34px;font-weight:500;color:#fca5a5;line-height:1">34.9%</div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:12px">overall attrition</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:11px">
+            <span style="width:9px;height:9px;border-radius:2px;background:#ef4444;display:inline-block"></span>
+            <span style="color:#94a3b8">Attrited</span><strong style="color:#e2e8f0;margin-left:6px">16,590</strong>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px">
+            <span style="width:9px;height:9px;border-radius:2px;background:#4ade80;display:inline-block"></span>
+            <span style="color:#94a3b8">Active</span><strong style="color:#e2e8f0;margin-left:6px">30,976</strong>
+          </div>
+        </div>
       </div>
     </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">Salary, tenure &amp; travel</div>
-  <div class="chart-grid-3">
-
-    <div class="chart-box">
-      <div class="chart-label">Attrition by income band</div>
-      <div style="position:relative;height:220px;"><canvas id="inc-chart" role="img" aria-label="Stacked bar chart of attrition by monthly income band">Income band attrition</canvas></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">Attrition rate by tenure</div>
-      <div style="position:relative;height:220px;"><canvas id="ten-chart" role="img" aria-label="Bar chart of attrition rate by tenure band">Tenure attrition: 10+ years have highest rate 35.6%</canvas></div>
-    </div>
-
-    <div class="chart-box">
-      <div class="chart-label">Business travel frequency</div>
-      <div style="position:relative;height:220px;"><canvas id="travel-chart" role="img" aria-label="Bar chart of attrition rate by travel frequency">Frequent travelers: 39.1% vs rarely 33.7%</canvas></div>
-    </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">Attrition rate by hire year</div>
-  <div style="position:relative;height:180px;">
-    <canvas id="year-chart" role="img" aria-label="Line chart of attrition rate trend from 2008 to 2023">Yearly attrition trend 2008-2023, range 33.5-36.4%</canvas>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">Key insights</div>
-  <div class="insight-grid">
-    <div class="insight-card">
-      <div class="insight-icon">OT</div>
-      <div class="insight-title">Overtime is the biggest risk factor</div>
-      <div class="insight-body">Employees working overtime have a <strong>41.5%</strong> attrition rate vs <strong>31.4%</strong> for those who don't — a <strong>10.1 percentage point</strong> gap, the largest single driver in the dataset.</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon">WLB</div>
-      <div class="insight-title">Poor work-life balance doubles risk</div>
-      <div class="insight-body">Employees rating WLB as <strong>Poor</strong> show <strong>40.8%</strong> attrition — 6.7pp above the average and closely correlated with the overtime finding.</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon">MAR</div>
-      <div class="insight-title">Single employees at higher risk</div>
-      <div class="insight-body">Single employees leave at <strong>37.5%</strong> vs married at 33.7% and divorced at 33.5% — a 4pp difference, consistent with lower switching costs and flexibility to relocate.</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon">TRV</div>
-      <div class="insight-title">Frequent travelers leave more often</div>
-      <div class="insight-body">Employees who travel frequently have <strong>39.1%</strong> attrition vs <strong>33.7%</strong> for those who rarely travel — a 5.4pp premium linked to burnout and WLB strain.</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon">TEN</div>
-      <div class="insight-title">Long-tenured staff show rising risk</div>
-      <div class="insight-body">Employees with <strong>10+ years</strong> at the company have the highest attrition rate at <strong>35.6%</strong> — possibly driven by career plateau and lack of promotion opportunities.</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon">EDU</div>
-      <div class="insight-title">High School graduates most at risk</div>
-      <div class="insight-body">High School education shows <strong>35.8%</strong> attrition, the highest of any education level, potentially due to fewer internal advancement pathways and lower compensation.</div>
+    <div class="card">
+      <div class="clbl">Attrition rate by department</div>
+      <div id="dept-bars"></div>
     </div>
   </div>
+
+  <div class="zone"><div class="ztitle">Risk factor gauges</div></div>
+  <div class="gauge-grid" id="gauge-grid"></div>
+
+  <div class="zone"><div class="ztitle">Demographics</div></div>
+  <div class="g3">
+    <div class="card purple-tint">
+      <div class="clbl">By gender</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="position:relative;width:100px;height:100px;flex-shrink:0">
+          <canvas id="dc-gen" role="img" aria-label="Gender donut">Male 35.3%, Female 34.7%, Non-Binary 34.6%</canvas>
+        </div>
+        <div style="flex:1">
+          <div class="ring-row"><span class="ring-name">Male</span><span class="ring-val" style="color:#93c5fd">35.3%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:82%;background:#3b82f6"></div></div>
+          <div style="height:7px"></div>
+          <div class="ring-row"><span class="ring-name">Female</span><span class="ring-val" style="color:#c4b5fd">34.7%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:78%;background:#8b5cf6"></div></div>
+          <div style="height:7px"></div>
+          <div class="ring-row"><span class="ring-name">Non-Binary</span><span class="ring-val" style="color:#6ee7b7">34.6%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:75%;background:#10b981"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card red-tint">
+      <div class="clbl">By marital status</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="position:relative;width:100px;height:100px;flex-shrink:0">
+          <canvas id="dc-mar" role="img" aria-label="Marital status donut">Single 37.5%, Married 33.7%, Divorced 33.5%</canvas>
+        </div>
+        <div style="flex:1">
+          <div class="ring-row"><span class="ring-name">Single</span><span class="ring-val" style="color:#fca5a5">37.5%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:96%;background:#ef4444"></div></div>
+          <div style="height:7px"></div>
+          <div class="ring-row"><span class="ring-name">Married</span><span class="ring-val" style="color:#fdba74">33.7%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:58%;background:#f97316"></div></div>
+          <div style="height:7px"></div>
+          <div class="ring-row"><span class="ring-name">Divorced</span><span class="ring-val" style="color:#86efac">33.5%</span></div>
+          <div class="rbar-track"><div class="rbar-fill" style="width:54%;background:#22c55e"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clbl">By age group</div>
+      <div style="position:relative;height:148px">
+        <canvas id="age-bar" role="img" aria-label="Age group bar chart">22-25: 34.7%, 26-35: 34.8%, 36-45: 34.8%, 46-55: 34.8%, 56-62: 35.3%</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone"><div class="ztitle">Exit reasons & satisfaction</div></div>
+  <div class="g2">
+    <div class="card amber-tint">
+      <div class="clbl">Why employees leave</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+        <div style="position:relative;width:110px;height:110px;flex-shrink:0">
+          <canvas id="dc-exit" role="img" aria-label="Exit reasons donut, all ~10% each">All 10 exit reasons approximately 10% each</canvas>
+        </div>
+        <div style="flex:1" id="exit-leg"></div>
+      </div>
+      <div id="exit-bars2"></div>
+    </div>
+    <div class="card">
+      <div class="clbl">Job satisfaction vs attrition</div>
+      <div class="lrow">
+        <span><span class="ldot" style="background:#ef4444"></span><span>Attrited</span></span>
+        <span><span class="ldot" style="background:#4ade80"></span><span>Active</span></span>
+      </div>
+      <div style="position:relative;height:170px">
+        <canvas id="sat-bar" role="img" aria-label="Grouped bars: satisfaction 1-2 has ~42% attrition">Satisfaction grouped bars</canvas>
+      </div>
+      <div style="margin-top:12px">
+        <div class="clbl" style="margin-bottom:7px">Performance rating</div>
+        <div style="position:relative;height:90px">
+          <canvas id="perf-bar" role="img" aria-label="Performance bar: Low 39.8%">Low: 39.8%, others: 34-35%</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone"><div class="ztitle">Salary · tenure · trend</div></div>
+  <div class="g2" style="margin-bottom:0">
+    <div class="card green-tint">
+      <div class="clbl">Monthly income band</div>
+      <div class="lrow">
+        <span><span class="ldot" style="background:#ef4444"></span><span>Attrited</span></span>
+        <span><span class="ldot" style="background:#4ade80"></span><span>Active</span></span>
+      </div>
+      <div style="position:relative;height:180px">
+        <canvas id="inc-bar" role="img" aria-label="Income band stacked bars">Income vs attrition</canvas>
+      </div>
+    </div>
+    <div class="card blue-tint">
+      <div class="clbl">Attrition rate by hire year (2008–2023)</div>
+      <div style="position:relative;height:210px">
+        <canvas id="yr-line" role="img" aria-label="Line chart 2008-2023 attrition trend">Annual trend 33.5-36.4%</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:12px"></div>
+  <div class="g2">
+    <div class="card">
+      <div class="clbl">Attrition rate by tenure</div>
+      <div style="position:relative;height:148px">
+        <canvas id="ten-bar" role="img" aria-label="Tenure bar chart: 10+ years highest 35.6%">Tenure attrition</canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clbl">Education level</div>
+      <div style="position:relative;height:148px">
+        <canvas id="edu-bar" role="img" aria-label="Education bar: High School 35.8%">Education attrition</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone" style="padding-top:14px"><div class="ztitle">Key insights</div></div>
+  <div class="ins-strip">
+    <div class="ins i1"><span class="ins-badge">High risk</span><div class="ins-head">Overtime drives a 10pp spike</div><div class="ins-body">41.5% vs 31.4% — the single largest predictor. Affects 34.9% of all staff who work overtime.</div></div>
+    <div class="ins i1"><span class="ins-badge">High risk</span><div class="ins-head">Poor WLB nearly mirrors overtime</div><div class="ins-body">40.8% attrition for Poor WLB — strongly correlated with overtime. Both factors compound each other.</div></div>
+    <div class="ins i2"><span class="ins-badge">Medium risk</span><div class="ins-head">Single employees leave 4pp more</div><div class="ins-body">37.5% vs 33.5–33.7% for other statuses — lower switching costs and greater geographic mobility.</div></div>
+    <div class="ins i2"><span class="ins-badge">Medium risk</span><div class="ins-head">Frequent travel adds 5.4pp</div><div class="ins-body">39.1% for frequent travellers vs 33.7% rarely-travel. Burnout and WLB strain are the drivers.</div></div>
+    <div class="ins i1"><span class="ins-badge">Critical</span><div class="ins-head">Top talent not retained better</div><div class="ins-body">High and Excellent performers leave at 34.8% — nearly identical to Average at 34.3%. No differential retention.</div></div>
+    <div class="ins i3"><span class="ins-badge">Info</span><div class="ins-head">10 exit reasons all at ~10%</div><div class="ins-body">No dominant cause. Work-Life Balance leads at 10.3% but all 10 are within 0.5pp — broad strategy needed.</div></div>
+  </div>
+  <div style="height:8px"></div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const ATTRITED = '#E24B4A';
-const ACTIVE   = '#639922';
-const BLUE     = '#378ADD';
-const AMBER    = '#EF9F27';
-const TEAL     = '#1D9E75';
-const PURPLE   = '#7F77DD';
-const CORAL    = '#D85A30';
-const GRID     = 'rgba(128,128,128,0.12)';
+const lc='#475569', gc='rgba(255,255,255,0.06)';
+const RED='#ef4444',GREEN='#4ade80',BLUE='#38bdf8',AMBER='#fb923c',TEAL='#34d399',PURPLE='#a78bfa',CORAL='#f97316';
 
-const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const labelColor = isDark ? '#B4B2A9' : '#5F5E5A';
-const gridColor  = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
-
-const defOpts = (extra={}) => ({
-  responsive: true, maintainAspectRatio: false,
-  plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.formattedValue + '%' } } },
-  scales: {
-    x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } },
-    y: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }
-  },
+const base=(extra)=>({
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{ticks:{color:lc,font:{size:10}},grid:{color:gc}}},
   ...extra
 });
 
-const deptData = [
-  {Department:'Marketing',rate:35.3},{Department:'HR',rate:35.3},{Department:'Finance',rate:35.2},
-  {Department:'Legal',rate:35.1},{Department:'R&D',rate:35.0},{Department:'Customer Support',rate:35.0},
-  {Department:'Engineering',rate:34.8},{Department:'Sales',rate:34.6},{Department:'Operations',rate:34.4},{Department:'IT',rate:34.3}
+new Chart(document.getElementById('dc-main'),{
+  type:'doughnut',
+  data:{labels:['Active','Attrited'],datasets:[{data:[30976,16590],backgroundColor:['#4ade80','#ef4444'],borderWidth:3,borderColor:'#0f172a',hoverOffset:5}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'74%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+((c.parsed/47566)*100).toFixed(1)+'%'}}}}
+});
+
+const depts=[{d:'Marketing',r:35.3},{d:'HR',r:35.3},{d:'Finance',r:35.2},{d:'Legal',r:35.1},{d:'R&D',r:35.0},{d:'Cust. Support',r:35.0},{d:'Engineering',r:34.8},{d:'Sales',r:34.6},{d:'Operations',r:34.4},{d:'IT',r:34.3}];
+const dc=document.getElementById('dept-bars');
+depts.forEach(x=>{
+  const col=x.r>=35.2?RED:x.r>=35.0?AMBER:TEAL;
+  const w=((x.r-34)/(35.5-34)*100).toFixed(0);
+  const row=document.createElement('div');row.className='hbar-row';
+  row.innerHTML=`<div class="hbar-name" title="${x.d}">${x.d}</div><div class="hbar-track"><div class="hbar-fill" style="width:${Math.max(8,w)}%;background:${col}"></div></div><div class="hbar-val">${x.r}%</div>`;
+  dc.appendChild(row);
+});
+
+const gauges=[
+  {l:'Overtime',v:41.5,b:31.4,c:RED},{l:'Poor WLB',v:40.8,b:34.1,c:RED},
+  {l:'Low sat score',v:42.3,b:30.9,c:RED},{l:'Low performer',v:39.8,b:34.3,c:AMBER},
+  {l:'Frequent travel',v:39.1,b:33.7,c:AMBER},{l:'Single status',v:37.5,b:33.5,c:AMBER},
+  {l:'10+ yr tenure',v:35.6,b:33.8,c:BLUE},{l:'High School',v:35.8,b:34.2,c:BLUE}
 ];
-const maxRate = 36;
-const deptContainer = document.getElementById('dept-bars');
-deptData.forEach(d => {
-  const row = document.createElement('div');
-  row.className = 'bar-row';
-  const pct = (d.rate / maxRate * 100).toFixed(1);
-  const color = d.rate >= 35.2 ? ATTRITED : d.rate >= 34.8 ? AMBER : TEAL;
-  row.innerHTML = `<div class="bar-name" title="${d.Department}">${d.Department}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div><div class="bar-val">${d.rate}%</div>`;
-  deptContainer.appendChild(row);
+const gg=document.getElementById('gauge-grid');
+gauges.forEach((g,i)=>{
+  const id='gv'+i;
+  const item=document.createElement('div');item.className='gitem';
+  item.innerHTML=`<div style="position:relative;width:72px;height:72px"><canvas id="${id}" role="img" aria-label="${g.l}: ${g.v}%">${g.v}%</canvas></div><div class="gval" style="color:${g.c}">${g.v}%</div><div class="glbl">${g.l}</div><div class="gbase">base: ${g.b}%</div>`;
+  gg.appendChild(item);
+  new Chart(document.getElementById(id),{
+    type:'doughnut',
+    data:{datasets:[
+      {data:[g.v,50-g.v],backgroundColor:[g.c,'rgba(255,255,255,0.07)'],borderWidth:0,circumference:270,rotation:-135},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'66%',plugins:{legend:{display:false},tooltip:{enabled:false}}}
+  });
 });
 
-new Chart(document.getElementById('ot-chart'), {
-  type: 'bar',
-  data: { labels: ['No overtime','Overtime'], datasets: [{ data: [31.4, 41.5], backgroundColor: [TEAL, ATTRITED], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 0, max: 50, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
+new Chart(document.getElementById('dc-gen'),{
+  type:'doughnut',
+  data:{labels:['Male','Female','Non-Binary'],datasets:[{data:[35.3,34.7,34.6],backgroundColor:['#3b82f6','#8b5cf6','#10b981'],borderWidth:2,borderColor:'#0f172a',hoverOffset:3}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.parsed.toFixed(1)+'%'}}}}
+});
+new Chart(document.getElementById('dc-mar'),{
+  type:'doughnut',
+  data:{labels:['Single','Married','Divorced'],datasets:[{data:[37.5,33.7,33.5],backgroundColor:[RED,AMBER,GREEN],borderWidth:2,borderColor:'#0f172a',hoverOffset:3}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.parsed.toFixed(1)+'%'}}}}
+});
+new Chart(document.getElementById('age-bar'),{
+  type:'bar',
+  data:{labels:['22–25','26–35','36–45','46–55','56–62'],datasets:[{data:[34.7,34.8,34.8,34.8,35.3],backgroundColor:[TEAL,TEAL,TEAL,AMBER,RED],borderRadius:5}]},
+  options:base({scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{min:32,max:37,ticks:{color:lc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}})
 });
 
-new Chart(document.getElementById('wlb-chart'), {
-  type: 'bar',
-  data: { labels: ['Poor','Fair','Good','Excellent'], datasets: [{ data: [40.8, 34.2, 34.1, 34.6], backgroundColor: [ATTRITED, AMBER, TEAL, BLUE], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 0, max: 50, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-new Chart(document.getElementById('gen-chart'), {
-  type: 'bar',
-  data: { labels: ['Female','Male','Non-Binary'], datasets: [{ data: [34.7, 35.3, 34.6], backgroundColor: [PURPLE, BLUE, TEAL], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 30, max: 40, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-new Chart(document.getElementById('age-chart'), {
-  type: 'bar',
-  data: { labels: ['22-25','26-35','36-45','46-55','56-62'], datasets: [{ data: [34.7, 34.8, 34.8, 34.8, 35.3], backgroundColor: [BLUE, BLUE, BLUE, AMBER, ATTRITED], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 32, max: 38, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-new Chart(document.getElementById('mar-chart'), {
-  type: 'bar',
-  data: { labels: ['Divorced','Married','Single'], datasets: [{ data: [33.5, 33.7, 37.5], backgroundColor: [TEAL, BLUE, ATTRITED], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 30, max: 42, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-const exitReasons = [
-  {reason:'Work-Life Balance',pct:10.3},{reason:'Health Issues',pct:10.2},{reason:'Company Culture',pct:10.0},
-  {reason:'Personal Reasons',pct:10.0},{reason:'Job Insecurity',pct:10.0},{reason:'Relocation',pct:10.0},
-  {reason:'Manager Conflict',pct:10.0},{reason:'Career Growth',pct:9.9},{reason:'Better Opportunity',pct:9.8},{reason:'Higher Salary',pct:9.8}
+const exits=[
+  {r:'Work-Life Balance',p:10.3,c:RED},{r:'Health Issues',p:10.2,c:CORAL},
+  {r:'Company Culture',p:10.0,c:AMBER},{r:'Personal Reasons',p:10.0,c:PURPLE},
+  {r:'Job Insecurity',p:10.0,c:BLUE},{r:'Relocation',p:10.0,c:TEAL},
+  {r:'Manager Conflict',p:10.0,c:'#f472b6'},{r:'Career Growth',p:9.9,c:'#a3e635'},
+  {r:'Better Opportunity',p:9.8,c:'#22d3ee'},{r:'Higher Salary',p:9.8,c:'#818cf8'}
 ];
-const exitColors = [ATTRITED,CORAL,AMBER,PURPLE,BLUE,TEAL,'#97C459','#5DCAA5','#7F77DD','#F09595'];
-const exitContainer = document.getElementById('exit-bars');
-exitReasons.forEach((d,i) => {
-  const row = document.createElement('div');
-  row.className = 'bar-row';
-  row.innerHTML = `<div class="bar-name bar-name-lg" title="${d.reason}">${d.reason}</div><div class="bar-track"><div class="bar-fill" style="width:${d.pct*9}%;background:${exitColors[i]};"></div></div><div class="bar-val">${d.pct}%</div>`;
-  exitContainer.appendChild(row);
+new Chart(document.getElementById('dc-exit'),{
+  type:'doughnut',
+  data:{labels:exits.map(x=>x.r),datasets:[{data:exits.map(x=>x.p),backgroundColor:exits.map(x=>x.c),borderWidth:1,borderColor:'#0f172a',hoverOffset:4}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'52%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.parsed.toFixed(1)+'%'}}}}
+});
+const el=document.getElementById('exit-leg');
+exits.slice(0,5).forEach(x=>{
+  const row=document.createElement('div');
+  row.style.cssText='display:flex;align-items:center;gap:5px;margin-bottom:5px;font-size:11px';
+  row.innerHTML=`<span style="width:7px;height:7px;border-radius:2px;background:${x.c};flex-shrink:0;display:inline-block"></span><span style="color:#64748b;flex:1">${x.r}</span><strong style="color:#cbd5e1">${x.p}%</strong>`;
+  el.appendChild(row);
+});
+const eb2=document.getElementById('exit-bars2');
+exits.slice(5).forEach(x=>{
+  const row=document.createElement('div');row.className='hbar-row';
+  row.innerHTML=`<div class="hbar-name" style="width:108px" title="${x.r}">${x.r}</div><div class="hbar-track"><div class="hbar-fill" style="width:${x.p*9}%;background:${x.c}"></div></div><div class="hbar-val">${x.p}%</div>`;
+  eb2.appendChild(row);
 });
 
-new Chart(document.getElementById('sat-chart'), {
-  type: 'bar',
-  data: {
-    labels: ['Score 1','Score 2','Score 3','Score 4','Score 5'],
-    datasets: [
-      { label: 'Attrited', data: [3970, 3860, 3126, 2813, 2821], backgroundColor: ATTRITED, borderRadius: 2 },
-      { label: 'Active',   data: [5420, 5337, 7429, 6470, 6320], backgroundColor: ACTIVE,   borderRadius: 2 }
-    ]
+new Chart(document.getElementById('sat-bar'),{
+  type:'bar',
+  data:{labels:['Score 1','Score 2','Score 3','Score 4','Score 5'],datasets:[
+    {label:'Attrited',data:[3970,3860,3126,2813,2821],backgroundColor:'#ef4444',borderRadius:3},
+    {label:'Active',data:[5420,5337,7429,6470,6320],backgroundColor:'#4ade80',borderRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{ticks:{color:lc,font:{size:10},callback:v=>(v/1000).toFixed(0)+'k'},grid:{color:gc}}}}
+});
+new Chart(document.getElementById('perf-bar'),{
+  type:'bar',
+  data:{labels:['Low','Average','High','Excellent'],datasets:[{data:[39.8,34.3,34.8,34.8],backgroundColor:[RED,AMBER,BLUE,TEAL],borderRadius:4}]},
+  options:base({scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{min:30,max:44,ticks:{color:lc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}})
+});
+
+new Chart(document.getElementById('inc-bar'),{
+  type:'bar',
+  data:{labels:['<$5k','$5–8k','$8–11k','$11–14k','$14k+'],datasets:[
+    {label:'Attrited',data:[2737,4459,4287,2776,2331],backgroundColor:'#ef4444',borderRadius:3},
+    {label:'Active',data:[5104,8342,7961,5340,4229],backgroundColor:'#4ade80',borderRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{ticks:{color:lc,font:{size:10},callback:v=>(v/1000).toFixed(0)+'k'},grid:{color:gc}}}}
+});
+new Chart(document.getElementById('yr-line'),{
+  type:'line',
+  data:{
+    labels:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
+    datasets:[{data:[35.6,35.3,35.4,36.4,35.9,35.3,34.9,34.6,33.9,34.9,35.0,35.7,33.6,33.5,34.3,33.8],
+      borderColor:BLUE,backgroundColor:'rgba(56,189,248,0.08)',fill:true,tension:0.4,
+      pointRadius:3,pointBackgroundColor:BLUE,pointHoverBackgroundColor:RED,borderWidth:2}]
   },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } },
-      y: { ticks: { color: labelColor, font: { size: 11 }, callback: v => (v/1000).toFixed(0) + 'k' }, grid: { color: gridColor } }
-    }
-  }
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.formattedValue+'%'}}},scales:{x:{ticks:{color:lc,font:{size:9},autoSkip:false,maxRotation:45},grid:{color:gc}},y:{min:32,max:38,ticks:{color:lc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}}
 });
-
-new Chart(document.getElementById('inc-chart'), {
-  type: 'bar',
-  data: {
-    labels: ['<$5k','$5-8k','$8-11k','$11-14k','$14k+'],
-    datasets: [
-      { label: 'Attrited', data: [2737, 4459, 4287, 2776, 2331], backgroundColor: ATTRITED, borderRadius: 2 },
-      { label: 'Active',   data: [5104, 8342, 7961, 5340, 4229], backgroundColor: ACTIVE,   borderRadius: 2 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } },
-      y: { stacked: false, ticks: { color: labelColor, font: { size: 11 }, callback: v => (v/1000).toFixed(0) + 'k' }, grid: { color: gridColor } }
-    }
-  }
+new Chart(document.getElementById('ten-bar'),{
+  type:'bar',
+  data:{labels:['<1 yr','1–3 yr','3–6 yr','6–10 yr','10+ yr'],datasets:[{data:[33.8,33.9,34.8,34.6,35.6],backgroundColor:[TEAL,TEAL,AMBER,AMBER,RED],borderRadius:5}]},
+  options:base({scales:{x:{ticks:{color:lc,font:{size:10}},grid:{color:gc}},y:{min:30,max:38,ticks:{color:lc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}})
 });
-
-new Chart(document.getElementById('ten-chart'), {
-  type: 'bar',
-  data: { labels: ['<1 yr','1-3 yr','3-6 yr','6-10 yr','10+ yr'], datasets: [{ data: [33.8, 33.9, 34.8, 34.6, 35.6], backgroundColor: [TEAL, TEAL, AMBER, AMBER, ATTRITED], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 30, max: 40, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-new Chart(document.getElementById('travel-chart'), {
-  type: 'bar',
-  data: { labels: ['No travel','Rarely','Frequently'], datasets: [{ data: [34.1, 33.7, 39.1], backgroundColor: [TEAL, TEAL, ATTRITED], borderRadius: 4 }] },
-  options: { ...defOpts(), scales: { x: { ticks: { color: labelColor, font: { size: 11 } }, grid: { color: gridColor } }, y: { min: 0, max: 50, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } } } }
-});
-
-new Chart(document.getElementById('year-chart'), {
-  type: 'line',
-  data: {
-    labels: [2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
-    datasets: [{
-      data: [35.6,35.3,35.4,36.4,35.9,35.3,34.9,34.6,33.9,34.9,35.0,35.7,33.6,33.5,34.3,33.8],
-      borderColor: BLUE, backgroundColor: 'rgba(55,138,221,0.1)', fill: true,
-      tension: 0.4, pointRadius: 3, pointBackgroundColor: BLUE, borderWidth: 2
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.formattedValue + '%' } } },
-    scales: {
-      x: { ticks: { color: labelColor, font: { size: 11 }, autoSkip: false, maxRotation: 45 }, grid: { color: gridColor } },
-      y: { min: 32, max: 38, ticks: { color: labelColor, font: { size: 11 }, callback: v => v + '%' }, grid: { color: gridColor } }
-    }
-  }
+new Chart(document.getElementById('edu-bar'),{
+  type:'bar',
+  data:{labels:['High School','Assoc.','Bachelor\'s','Master\'s','PhD'],datasets:[{data:[35.8,34.0,35.0,35.1,34.2],backgroundColor:[RED,TEAL,BLUE,AMBER,TEAL],borderRadius:5}]},
+  options:base({scales:{x:{ticks:{color:lc,font:{size:9}},grid:{color:gc}},y:{min:32,max:38,ticks:{color:lc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}})
 });
 </script>
